@@ -1,0 +1,26 @@
+name: Development workflow
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '^1.19.1' # The Go version to download (if necessary) and use.
+      - run: go version
+      - run: go mod 
+      - run: go mod tidy
+      - run: go run hello.go
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: '5d6db788-44ed-41ee-8a06-b3e2e2e46ef7'
+          heroku_app_name: 'prj-heroku-golang-sample'
+          heroku_email: 'phamdat128@gmail.com'
