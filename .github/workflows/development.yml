@@ -16,7 +16,7 @@ jobs:
           go-version: '^1.18.2' # The Go version to download (if necessary) and use.
       - run: go version
       - run: go mod download
-      - run: go run main.go
+      - run: go build -o app main.go
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
